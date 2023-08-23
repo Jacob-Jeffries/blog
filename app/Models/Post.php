@@ -18,25 +18,29 @@ class Post
         }, $files);
     }
 
+    public static function sort($fileData)
+    {
+        $dates = array_map(function ($file) {
+            return $file['date'];
+        }, $fileData);
+
+        array_multisort($dates, $fileData);
+
+        return $fileData;
+    }
+
     public static function find($slug)
     {
-        // of all the blog posts find a post that matches the slug
-        $posts = static::all();
+        $info = [];
 
-        return array_filter($posts, function ($posts) use ($slug) {
-            return array_map(function ($post) use ($slug) {
-                if ($post['filename'] == $slug) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }, $posts);
-        });
+        if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
+            throw new ModelNotFoundException();
+        } else {
+            $info = get_meta_tags($path);
+            $info['body'] = file_get_contents($path);
+            return $info;
+        }
 
-        // array_map(function ($post) use ($slug) {
-        //     if ($post['filename'] == $slug) {
-        //         return $post;
-        //     };
-        // }, $posts);
+        return $info;
     }
 }

@@ -15,19 +15,29 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    // $posts = Post::all();
-    // dd($posts[0]['filename']);
+    $posts = Post::all();
+    $sorted = Post::sort($posts);
+    // dd($sorted);
+
+    $test = date_parse_from_format("Y-m-d", "2023-08-21");
+    $currentDate = date("Y-m-d");
+    // dd($test);
+    // dd($currentDate);
+
+
 
     return view('posts', [
-        'posts' => Post::all(),
+        'posts' => $sorted,
+        'currentDate' => $currentDate,
+        'date' => $test,
     ]);
 });
 
 Route::get('post/{post}', function ($slug) {
-    $post = Post::find($slug);
-    dd($post);
+    // $post = Post::find($slug);
+    // dd($post);
 
     return view('post', [
-    'post' => $post = Post::find($slug),
+    'post' => Post::find($slug),
     ]);
 })->where('post', '[A-z_\-]+');
