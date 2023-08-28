@@ -26,7 +26,7 @@ Route::get('/', function () {
     // dd($currentDate);
 
     return view('posts', [
-        'posts' => Post::all()->sortBy('date'),
+        'posts' => Post::all()->sortByDesc('date'),
     ]);
 });
 
