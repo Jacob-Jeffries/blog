@@ -1,9 +1,6 @@
-<!DOCTYPE html>
+@extends ('layout')
 
-<title>My Blog Test</title>
-<link rel="stylesheet" href="/app.css">
-
-<body>
+@section ('content')
     <h1>Hello World!</h1>
 
     @foreach ($posts as $post)
@@ -16,6 +13,4 @@
             </div>
         </article>
     @endforeach
-
-</body>
-</html>
+@endsection
