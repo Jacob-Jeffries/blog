@@ -8,11 +8,11 @@
 
     <?php foreach ($posts as $post) : ?>
         <article>
-            <h2><a href="/post/<?= $post['filename']; ?>"><?= $post['title']; ?></a></h2>
-            <h3><?= $post['date'] ?></h3>
+            <h2><a href="/post/<?= $post->filename; ?>"><?= $post->title; ?></a></h2>
+            <h3><?= $post->date ?></h3>
 
             <div>
-                <?= $post['body']; ?>
+                <?= $post->body; ?>
             </div>
         </article>
     <?php endforeach; ?>

@@ -15,21 +15,18 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
-    $sorted = Post::sort($posts);
+    // $posts = Post::all();
+    // $sorted = Post::sort($posts);
     // dd($sorted);
+    // $sorted = $posts->sortBy('date');
 
-    $test = date_parse_from_format("Y-m-d", "2023-08-21");
-    $currentDate = date("Y-m-d");
+    // $test = date_parse_from_format("Y-m-d", "2023-08-21");
+    // $currentDate = date("Y-m-d");
     // dd($test);
     // dd($currentDate);
 
-
-
     return view('posts', [
-        'posts' => $sorted,
-        'currentDate' => $currentDate,
-        'date' => $test,
+        'posts' => Post::all()->sortBy('date'),
     ]);
 });
 
