@@ -30,11 +30,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('post/{post}', function ($id) {
-    // $post = Post::find($slug);
-    // dd($post);
-
+Route::get('post/{post}', function (Post $post) {
+    // Using the Route Model Binding method, the "slug" defaults to the id
+    // To Change the search option {post:slug}
+    // You can change the default key in the Model file:
+    // getRouteKeyName(){return 'slug';} -- This is the old fashioned way.
     return view('post', [
-    'post' => Post::find($id),
+    'post' => $post,
     ]);
 });

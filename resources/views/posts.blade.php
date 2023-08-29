@@ -9,7 +9,7 @@
             <h3>{{$post->published_at}}</h3>
 
             <div>
-                {!! $post->body !!}
+                {{$post->excerpt}}
             </div>
         </article>
     @endforeach
