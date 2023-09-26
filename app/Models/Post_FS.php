@@ -5,40 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 
-class Post
+/**
+ * This is really the controller for the Post Model
+ */
+class Post_FS
 {
-
-    public $title;
-    public $author;
-    public $date;
-    public $filename;
-    public $fileextension;
-    public $body;
-
-    public function __construct($title, $author, $date, $fileName, $fileExtension, $body)
+    // With PHP 8 we can skip the initial property declaration and reassignment.
+    public function __construct(public $title, public $author, public $date, public $fileName, public $fileExtension, public $body)
     {
-        $this->title = $title;
-        $this->author = $author;
-        $this->date = $date;
-        $this->filename = $fileName;
-        $this->fileextension = $fileExtension;
-        $this->body = $body;
     }
 
     public static function all()
     {
+        // The Files facade gives us access to file & directory maipulation.
         $files = File::files(resource_path("posts/"));
 
         $array = array_map(function ($file) {
+            // YAML front matter does this in one step.
             $info = get_meta_tags($file->getPathName());
             $info['body'] = $file->getContents();
+            // dd($info);
             return $info;
         }, $files);
 
         // dd($array);
 
         return collect($array)
-            ->map(fn($file)=>new Post(
+            ->map(fn($file)=>new Post_FS(
                 $file['title'],
                 $file['author'],
                 $file['date'],

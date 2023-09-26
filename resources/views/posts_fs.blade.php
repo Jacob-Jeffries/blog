@@ -5,11 +5,11 @@
 
     @foreach ($posts as $post)
         <article>
-            <h2><a href="/post/{{$post->id}}">{{$post->title}}</a></h2>
-            <h3>{{$post->published_at}}</h3>
+            <h2><a href="/post/{{$post->fileName}}">{{$post->title}}</a></h2>
+            <h3>{{$post->date}}</h3>
 
             <div>
-                {{$post->excerpt}}
+                {!! $post->body !!}
             </div>
         </article>
     @endforeach

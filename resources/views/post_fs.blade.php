@@ -3,7 +3,7 @@
 @section('content')
   <article>
     <h2><?= $post['title']; ?></h2>
-    <?= $post['body']; ?>
+      <?= $post['body']; ?>
   </article>
   <a href="/">Go Back</a>
 @endsection
