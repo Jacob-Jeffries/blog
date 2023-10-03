@@ -1,9 +1,12 @@
 @extends ('layout')
 
 @section('content')
-  <article>
-    <h2><?= $post['title']; ?></h2>
-      <?= $post['body']; ?>
-  </article>
-  <a href="/">Go Back</a>
+  <div>
+    <h2>{{ $post->title }}</h2>
+    <h4>By <a href="#">{{ $post->user->name }}</a> within the <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a> Category</h4>
+    <article>
+      {!! $post->body !!}
+    </article>
+    <a href="/">Go Back</a>
+  </div>
 @endsection

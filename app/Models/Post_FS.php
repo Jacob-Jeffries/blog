@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 
 /**
- * This is really the controller for the Post Model
+ * This is the class to contain our posts, form file system.
  */
 class Post_FS
 {
@@ -57,6 +57,7 @@ class Post_FS
         $data = [];
 
         if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
+            // The ModelNotFoundExceptoin loads a 404 error on the view.
             throw new ModelNotFoundException();
         } else {
             $data = get_meta_tags($path);
