@@ -7,7 +7,10 @@
     @foreach ($posts as $post)
         <div>
             <h3><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h3>
-            <h4><a href="/categories/{{ $post->category->slug }}">Category: {{ $post->category->name }}</a></h4>
+            <br/>
+            By <a href="/user/{{ $post->user->username }}">{{ $post->user->name }}</a> in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+            <br/>
+            <br/>
             <article>
                 {!! $post->excerpt !!}
             </article>

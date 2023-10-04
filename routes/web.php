@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Post_FS;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +49,9 @@ Route::get('/', function () {
     // });
 
     return view('posts_fs', [
-        'posts' => Post::with('category')->get(),
+        // We can Eager Load our posts with their cat & user.
+        // We can also sort the posts by using their 'published_at' timestamp.
+        'posts' => Post::latest('published_at')->with('category', 'user')->get(),
     ]);
 });
 
@@ -62,5 +64,11 @@ Route::get('/post/{post}', function ($id) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts_fs', [
         'posts' => $category->posts,
+    ]);
+});
+
+Route::get('/user/{user:username}', function (User $user) {
+    return view('posts_fs', [
+        'posts' => $user->posts,
     ]);
 });
