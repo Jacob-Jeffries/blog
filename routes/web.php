@@ -63,12 +63,12 @@ Route::get('/post/{post}', function ($id) {
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts_fs', [
-        'posts' => $category->posts,
+        'posts' => $category->posts->load('category', 'user'),
     ]);
 });
 
 Route::get('/user/{user:username}', function (User $user) {
     return view('posts_fs', [
-        'posts' => $user->posts,
+        'posts' => $user->posts->load('category', 'user'),
     ]);
 });
