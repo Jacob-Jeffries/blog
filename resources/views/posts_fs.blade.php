@@ -1,22 +1,19 @@
-@extends ('layout')
+<x-layout>
 
-@section ('content')
-    <h1>Hello World!</h1>
-    <a href="/">Home</a>
+@include ('_posts_fs-header')
 
-    @foreach ($posts as $post)
-        <div>
-            <h3><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h3>
-            <br/>
-            By <a href="/user/{{ $post->user->username }}">{{ $post->user->name }}</a> in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
-            <br/>
-            <br/>
-            <article>
-                {!! $post->excerpt !!}
-            </article>
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        <x-post-featured-card />
+
+        <div class="lg:grid lg:grid-cols-2">
+           <x-post-card />
+           <x-post-card />
         </div>
-    @endforeach
-    <br/>
-    <br />
-    <a href="/">Home</a>
-@endsection
+
+        <div class="lg:grid lg:grid-cols-3">
+            <x-post-card />
+            <x-post-card />
+            <x-post-card />
+        </div>
+    </main>
+</x-layout>
