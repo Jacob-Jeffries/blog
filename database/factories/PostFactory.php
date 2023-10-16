@@ -12,7 +12,7 @@ use App\Models\Category;
 class PostFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Define the model's default state https://fakerphp.github.io/
      *
      * @return array<string, mixed>
      */
@@ -23,8 +23,8 @@ class PostFactory extends Factory
             'category_id' => random_int(1,3),
             'title' => fake()->catchPhrase,
             'slug' => fake()->slug,
-            'excerpt' => fake()->sentence, // sentences threw an error!
-            'body' => '<p>' . fake()->realText($maxNbChars = 400, $indexSize = 2) . '</p>',
+            'excerpt' => '<p>' . implode('</p><br/><p>', $this->faker->paragraphs(2)) . '</p>',
+            'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(10)) . '</p>',
 
         ];
     }

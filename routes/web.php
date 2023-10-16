@@ -52,6 +52,7 @@ Route::get('/', function () {
         // We can Eager Load our posts with their cat & user.
         // We can also sort the posts by using their 'published_at' timestamp.
         'posts' => Post::latest('published_at')->with('category', 'user')->get(),
+        'categories' => Category::all(),
     ]);
 });
 
@@ -64,6 +65,8 @@ Route::get('/post/{post}', function ($id) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts_fs', [
         'posts' => $category->posts->load('category', 'user'),
+        'currentCategory' => $category,
+        'categories' => Category::all(),
     ]);
 });
 
